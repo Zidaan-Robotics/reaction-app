@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reaction-app</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: white;
+      }
+      #root {
+        min-height: 100vh;
+      }
+      /* Show loading message while React loads */
+      #root:empty::before {
+        content: "Loading app...";
+        display: block;
+        padding: 20px;
+        text-align: center;
+        color: #666;
+        font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Fallback if React doesn't load
+      setTimeout(function() {
+        var root = document.getElementById('root');
+        if (root && root.children.length === 0) {
+          root.innerHTML = '<div style="padding: 20px; text-align: center;"><h1>App Loading...</h1><p>If this message persists, check the browser console for errors.</p></div>';
+        }
+      }, 3000);
+    </script>
+  </body>
+</html>

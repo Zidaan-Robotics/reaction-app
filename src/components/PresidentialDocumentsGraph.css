@@ -1,0 +1,245 @@
+.graph-container {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+}
+
+.graph-header {
+  padding: 20px;
+  background: white;
+  border-bottom: 2px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.graph-header h1 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 28px;
+}
+
+.graph-stats {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.graph-wrapper {
+  flex: 1;
+  position: relative;
+  background: white;
+  border: 1px solid #e0e0e0;
+  margin: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-height: 400px;
+  height: calc(100% - 140px);
+  width: calc(100% - 40px);
+}
+
+.axis-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.graph-wrapper > canvas {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative;
+  z-index: 2;
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #666;
+}
+
+.loading::after {
+  content: '...';
+  animation: loading-dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes loading-dots {
+  0%, 20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60%, 100% {
+    content: '...';
+  }
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.node-details {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.node-details h3 {
+  margin: 0 0 16px 0;
+  color: #333;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 8px;
+}
+
+.node-details p {
+  margin: 12px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.node-details a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.node-details a:hover {
+  text-decoration: underline;
+}
+
+.node-details button {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.node-details button:hover {
+  background: #357abd;
+}
+
+.legend {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  max-width: 250px;
+}
+
+.legend h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #555;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+}
+
+.layout-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  max-width: 280px;
+}
+
+.layout-controls h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.control-buttons button {
+  flex: 1;
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.control-buttons button:hover {
+  background: #e0e0e0;
+  border-color: #4a90e2;
+}
+
+.control-buttons button.active {
+  background: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+}
+
+.layout-explanation {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.layout-explanation p {
+  margin: 0;
+}
+
+.layout-explanation strong {
+  color: #333;
+}
+

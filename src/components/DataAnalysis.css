@@ -1,0 +1,278 @@
+.data-analysis {
+  width: 100%;
+  height: 100%;
+  background: #f9f9f9;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.analysis-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
+
+.analysis-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.analysis-header h2 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 32px;
+}
+
+.analysis-subtitle {
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.analysis-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.analysis-section {
+  background: white;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.analysis-section h3 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 24px;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 8px;
+}
+
+.section-explanation {
+  margin: 0 0 20px 0;
+  color: #555;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.stat-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #4a90e2;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: bold;
+  color: #4a90e2;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.stat-explanation {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.relationship-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.relationship-item {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 6px;
+  border-left: 4px solid #4a90e2;
+}
+
+.relationship-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.relationship-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.relationship-count {
+  font-weight: bold;
+  color: #4a90e2;
+  font-size: 18px;
+}
+
+.relationship-bar {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.relationship-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a90e2, #357abd);
+  transition: width 0.3s ease;
+}
+
+.relationship-percentage {
+  font-size: 12px;
+  color: #666;
+}
+
+.connected-documents {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.connected-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 6px;
+  border-left: 4px solid #4a90e2;
+  transition: transform 0.2s;
+}
+
+.connected-doc-item:hover {
+  transform: translateX(4px);
+}
+
+.doc-rank {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a90e2;
+  min-width: 40px;
+  text-align: center;
+}
+
+.doc-info {
+  flex: 1;
+}
+
+.doc-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.doc-title {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.doc-date {
+  color: #888;
+  font-size: 12px;
+}
+
+.doc-connections {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  min-width: 80px;
+}
+
+.connections-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4a90e2;
+}
+
+.connections-label {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.insight-item {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 6px;
+  border-top: 4px solid #4a90e2;
+}
+
+.insight-item h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.insight-item p {
+  margin: 0;
+  color: #555;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .insights {
+    grid-template-columns: 1fr;
+  }
+
+  .connected-doc-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .doc-rank {
+    align-self: flex-start;
+  }
+}
+
