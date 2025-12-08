@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import PresidentialDocumentsGraph from './components/PresidentialDocumentsGraph'
 import DataAnalysis from './components/DataAnalysis'
+import PrivateRoute from './components/PrivateRoute'
+import UserProfile from './components/UserProfile'
 import './App.css'
 
 function App() {
@@ -97,39 +99,44 @@ function App() {
   }
 
   return (
-    <div className="app-container">
-      <div className="app-header">
-        <h1>Presidential Documents Network</h1>
-        <div className="tab-navigation">
-          <button
-            className={`tab-button ${activeTab === 'graph' ? 'active' : ''}`}
-            onClick={() => setActiveTab('graph')}
-          >
-            Network Graph
-          </button>
-          <button
-            className={`tab-button ${activeTab === 'analysis' ? 'active' : ''}`}
-            onClick={() => setActiveTab('analysis')}
-          >
-            Data Analysis
-          </button>
+    <PrivateRoute>
+      <div className="app-container">
+        <div className="app-header">
+          <h1>Presidential Documents Network</h1>
+          <div className="header-right">
+            <div className="tab-navigation">
+              <button
+                className={`tab-button ${activeTab === 'graph' ? 'active' : ''}`}
+                onClick={() => setActiveTab('graph')}
+              >
+                Network Graph
+              </button>
+              <button
+                className={`tab-button ${activeTab === 'analysis' ? 'active' : ''}`}
+                onClick={() => setActiveTab('analysis')}
+              >
+                Data Analysis
+              </button>
+            </div>
+            <UserProfile />
+          </div>
+        </div>
+        <div className="app-content">
+          {activeTab === 'graph' && (
+            graphData ? (
+              <PresidentialDocumentsGraph initialData={graphData} />
+            ) : (
+              <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+                <p>No graph data available. Please wait for data to load.</p>
+              </div>
+            )
+          )}
+          {activeTab === 'analysis' && (
+            <DataAnalysis graphData={graphData} />
+          )}
         </div>
       </div>
-      <div className="app-content">
-        {activeTab === 'graph' && (
-          graphData ? (
-            <PresidentialDocumentsGraph initialData={graphData} />
-          ) : (
-            <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
-              <p>No graph data available. Please wait for data to load.</p>
-            </div>
-          )
-        )}
-        {activeTab === 'analysis' && (
-          <DataAnalysis graphData={graphData} />
-        )}
-      </div>
-    </div>
+    </PrivateRoute>
   )
 }
 

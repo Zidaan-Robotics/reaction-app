@@ -1,16 +1,96 @@
-# React + Vite
+# Reaction App - Presidential Documents Network
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application for visualizing and analyzing presidential documents with Firebase Authentication.
 
-Currently, two official plugins are available:
+## Firebase Authentication Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This app uses Firebase Authentication for user management. To set it up:
 
-## React Compiler
+### 1. Create a Firebase Project
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Click "Add project" or select an existing project
+3. Follow the setup wizard
 
-## Expanding the ESLint configuration
+### 2. Enable Authentication
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. In your Firebase project, go to **Authentication** > **Get started**
+2. Enable the following sign-in methods:
+   - **Email/Password** (enable both Email/Password and Anonymous if desired)
+   - **GitHub** (optional, but recommended)
+
+#### Setting up GitHub Authentication
+
+To enable GitHub sign-in, you need to create a GitHub OAuth App and get the **Client ID** and **Client Secret**:
+
+1. **Create a GitHub OAuth App:**
+   - Go to [GitHub Developer Settings](https://github.com/settings/developers)
+   - Click **"New OAuth App"** button
+   - Fill in the form:
+     - **Application name**: e.g., "Presidential Documents App"
+     - **Homepage URL**: Your app's URL (e.g., `http://localhost:5173` for development or your production URL)
+     - **Authorization callback URL**: `https://YOUR-PROJECT-ID.firebaseapp.com/__/auth/handler`
+       - Replace `YOUR-PROJECT-ID` with your Firebase project ID (found in Firebase Console > Project Settings > General)
+       - Example: If your project ID is `my-react-app-a2ff3`, the callback URL would be:
+         `https://my-react-app-a2ff3.firebaseapp.com/__/auth/handler`
+   - Click **"Register application"**
+
+2. **Get Your Credentials:**
+   - After creating the app, you'll see a **Client ID** (this is public, you can share it)
+   - Click **"Generate a new client secret"** to create a **Client Secret** (this is private - copy it immediately as you won't be able to see it again!)
+
+3. **Add Credentials to Firebase:**
+   - Go back to Firebase Console > **Authentication** > **Sign-in method**
+   - Click on **GitHub** provider
+   - Toggle **Enable** switch
+   - Paste your **Client ID** and **Client Secret** from GitHub
+   - Click **Save**
+
+### 3. Get Your Firebase Config
+
+1. Go to **Project Settings** (gear icon)
+2. Scroll down to **Your apps** section
+3. Click the web icon (`</>`) to add a web app
+4. Copy the Firebase configuration object
+
+### 4. Create Environment Variables
+
+Create a `.env` file in the root directory with your Firebase configuration:
+
+```env
+VITE_FIREBASE_API_KEY=your-api-key-here
+VITE_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+VITE_FIREBASE_APP_ID=your-app-id
+```
+
+Replace the placeholder values with your actual Firebase config values.
+
+### 5. Install Dependencies
+
+```bash
+npm install
+```
+
+### 6. Run the App
+
+```bash
+npm run dev
+```
+
+## Features
+
+- 🔐 Firebase Authentication (Email/Password and GitHub Sign-In)
+- 📊 Interactive network graph visualization
+- 📈 Data analysis dashboard
+- 🔒 Protected routes (login required to access the app)
+
+## Project Structure
+
+- `src/firebase/config.js` - Firebase configuration and initialization
+- `src/contexts/AuthContext.jsx` - Authentication context and provider
+- `src/components/Auth.jsx` - Login/Signup component
+- `src/components/PrivateRoute.jsx` - Route protection component
+- `src/components/UserProfile.jsx` - User profile and logout component
