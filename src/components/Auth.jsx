@@ -23,7 +23,26 @@ export default function Auth() {
         await signup(email, password, displayName);
       }
     } catch (err) {
-      setError(err.message || 'Failed to authenticate');
+      // Handle specific Firebase auth errors with user-friendly messages
+      let errorMessage = 'Failed to authenticate';
+      
+      if (err.code === 'auth/account-exists-with-different-credential') {
+        errorMessage = 'An account with this email already exists using a different sign-in method. Please use the original sign-in method (e.g., GitHub) or try signing in instead of signing up.';
+      } else if (err.code === 'auth/email-already-in-use') {
+        errorMessage = 'This email is already registered. Please sign in instead.';
+      } else if (err.code === 'auth/user-not-found') {
+        errorMessage = 'No account found with this email. Please sign up first.';
+      } else if (err.code === 'auth/wrong-password') {
+        errorMessage = 'Incorrect password. Please try again.';
+      } else if (err.code === 'auth/invalid-email') {
+        errorMessage = 'Invalid email address. Please check and try again.';
+      } else if (err.code === 'auth/weak-password') {
+        errorMessage = 'Password is too weak. Please use at least 6 characters.';
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -35,7 +54,19 @@ export default function Auth() {
     try {
       await signInWithGithub();
     } catch (err) {
-      setError(err.message || 'Failed to sign in with GitHub');
+      let errorMessage = 'Failed to sign in with GitHub';
+      
+      if (err.code === 'auth/account-exists-with-different-credential') {
+        errorMessage = 'An account with this email already exists using email/password. Please sign in with your email and password instead.';
+      } else if (err.code === 'auth/popup-closed-by-user') {
+        errorMessage = 'Sign-in popup was closed. Please try again.';
+      } else if (err.code === 'auth/popup-blocked') {
+        errorMessage = 'Popup was blocked by your browser. Please allow popups and try again.';
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
       setLoading(false);
     }
   };

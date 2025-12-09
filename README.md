@@ -80,6 +80,38 @@ npm install
 npm run dev
 ```
 
+## Deployment to Firebase Hosting
+
+To deploy your app to Firebase Hosting:
+
+### Important: Environment Variables for Production
+
+**Vite embeds environment variables at build time**, so you must have your `.env` file present when running the build command.
+
+1. **Make sure your `.env` file exists** in the root directory with all Firebase configuration variables (see step 4 above).
+
+2. **Build the app:**
+   ```bash
+   npm run build
+   ```
+   This will check for required environment variables and then build the app.
+
+3. **Deploy to Firebase:**
+   ```bash
+   firebase deploy
+   ```
+
+### Troubleshooting Deployment
+
+If the login page doesn't show up in production but works locally:
+
+- **Check that your `.env` file exists** when running `npm run build`
+- **Verify all environment variables are set** - the build script will check this automatically
+- **Check the browser console** on your deployed site for Firebase configuration errors
+- **Make sure you're using the same Firebase project** for both development and production
+
+**Note:** The `.env` file should NOT be committed to git (it's in `.gitignore`), but you need it locally when building for production.
+
 ## Features
 
 - 🔐 Firebase Authentication (Email/Password and GitHub Sign-In)

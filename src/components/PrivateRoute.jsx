@@ -26,7 +26,13 @@ export default function PrivateRoute({ children }) {
   }
 
   // Show login page if not authenticated, otherwise show app
-  return currentUser ? children : <Auth />;
+  if (!currentUser) {
+    console.log('PrivateRoute: No user found, showing login page');
+    return <Auth />;
+  }
+
+  console.log('PrivateRoute: User authenticated, showing app');
+  return children;
 }
 
 

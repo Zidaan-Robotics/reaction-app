@@ -51,12 +51,36 @@ export const AuthProvider = ({ children }) => {
 
   // Listen for auth state changes
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    console.log('AuthContext: Setting up auth state listener');
+    
+    if (!auth) {
+      console.error('AuthContext: Firebase auth is not initialized!');
+      setCurrentUser(null);
       setLoading(false);
-    });
+      return;
+    }
 
-    return unsubscribe;
+    try {
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (user) => {
+          console.log('AuthContext: Auth state changed', user ? `User: ${user.email}` : 'No user');
+          setCurrentUser(user);
+          setLoading(false);
+        },
+        (error) => {
+          console.error('AuthContext: Auth state error', error);
+          setCurrentUser(null);
+          setLoading(false);
+        }
+      );
+
+      return unsubscribe;
+    } catch (error) {
+      console.error('AuthContext: Failed to set up auth listener', error);
+      setCurrentUser(null);
+      setLoading(false);
+    }
   }, []);
 
   const value = {

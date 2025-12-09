@@ -12,6 +12,11 @@ export default function UserProfile() {
     }
   };
 
+  // If no user, don't render anything (shouldn't happen due to PrivateRoute, but safety check)
+  if (!currentUser) {
+    return null;
+  }
+
   return (
     <div className="user-profile">
       <div className="user-info">
@@ -35,5 +40,6 @@ export default function UserProfile() {
     </div>
   );
 }
+
 
 
