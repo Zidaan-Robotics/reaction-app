@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "my-react-app-a2ff3",
     "public": "dist",
     "ignore": [
       "firebase.json",
